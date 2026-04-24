@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+service Service{
+    rpc Process (Request) returns (Response);
+}
+message Address {
+    string street = 1;
+    string city = 2;
+    string state = 3;
+    string zip = 4;
+}
+message Metadata {
+    string browser = 1;
+    string os = 2;
+    int32 latency = 3;
+}
+
+message Event  {
+    string type = 1;
+    int64 timestamp = 2;
+    Metadata metadata = 3;
+}
+
+message Profile {
+    string dob = 1;
+    string gender = 2;
+    string pan = 3;
+    repeated string phones = 4;
+    repeated Address addresses = 5;  
+}
+
+message User {
+    int32 id = 1;
+    string name = 2;
+    string email = 3;
+    Profile profile = 4;
+}
+
+message Request {
+    string request_id = 1;
+    User user = 2;
+    repeated Event events = 3;
+}
+
+message Response{
+    int32 result = 1;
+}
